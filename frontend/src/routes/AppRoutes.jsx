@@ -23,7 +23,6 @@ function AppRoutes() {
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );
