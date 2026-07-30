@@ -11,3 +11,11 @@ export const loginStudent = (data) => {
 export const getDashboard = (id) => {
   return api.get(`/dashboard/${id}`);
 };
+
+export const getProfile = (id) => {
+  return api.get(`/profile/${id}`);
+};
+
+export const updateProfile = (id, data) => {
+  return api.put(`/profile/${id}`, data);
+};
