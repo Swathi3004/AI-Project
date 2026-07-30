@@ -19,3 +19,11 @@ export const getProfile = (id) => {
 export const updateProfile = (id, data) => {
   return api.put(`/profile/${id}`, data);
 };
+
+export const getQuizzes = () => {
+  return api.get("/quizzes");
+};
+
+export const submitQuiz = (data) => {
+  return api.post("/submit-quiz", data);
+};

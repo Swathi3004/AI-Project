@@ -10,6 +10,7 @@ import Quiz from "../pages/Quiz";
 import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
 
+
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -23,7 +24,7 @@ function AppRoutes() {
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/profile" element={<Profile />} />
+        
       </Routes>
     </BrowserRouter>
   );

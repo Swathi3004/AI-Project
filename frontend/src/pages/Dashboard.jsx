@@ -46,6 +46,13 @@ function Dashboard() {
   >
     Profile
   </button>
+
+  <button
+      onClick={() => navigate("/quiz")}
+      className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg"
+    >
+      Quiz
+    </button>
 </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
