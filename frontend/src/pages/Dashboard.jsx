@@ -4,9 +4,14 @@ import {
   FaRobot,
   FaClipboardCheck,
 } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getQuizResult } from "../services/authService";
 
 function Dashboard() {
+  const [quizResult, setQuizResult] = useState({
+  percentage: 0,
+});
   const cards = [
     {
       title: "Student",
@@ -20,7 +25,7 @@ function Dashboard() {
     },
     {
       title: "Quiz Score",
-      value: "85%",
+      value: `${quizResult.percentage}%`,
       icon: <FaClipboardCheck className="text-4xl text-orange-500" />,
     },
     {
@@ -31,6 +36,19 @@ function Dashboard() {
   ];
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+  fetchQuizResult();
+}, []);
+
+const fetchQuizResult = async () => {
+  try {
+    const response = await getQuizResult(1);
+    setQuizResult(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 
   return (
