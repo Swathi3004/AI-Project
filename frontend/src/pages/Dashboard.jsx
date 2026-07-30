@@ -4,6 +4,7 @@ import {
   FaRobot,
   FaClipboardCheck,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const cards = [
@@ -29,11 +30,23 @@ function Dashboard() {
     },
   ];
 
+  const navigate = useNavigate();
+
+
   return (
     <div className="min-h-screen bg-slate-100 p-10">
-      <h1 className="text-4xl font-bold text-blue-700 mb-8">
-        Student Dashboard
-      </h1>
+      <div className="flex justify-between items-center mb-8">
+  <h1 className="text-4xl font-bold text-blue-700">
+    Student Dashboard
+  </h1>
+
+  <button
+    onClick={() => navigate("/profile")}
+    className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg"
+  >
+    Profile
+  </button>
+</div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {cards.map((card, index) => (
