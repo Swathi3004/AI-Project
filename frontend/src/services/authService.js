@@ -32,3 +32,7 @@ export const getQuizResult = (studentId) => {
   return api.get(`/quiz-result/${studentId}`);
 };
 
+export const getPerformanceHistory = (studentId) => {
+  return api.get(`/performance-history/${studentId}`);
+};
+

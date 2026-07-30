@@ -158,5 +158,42 @@ def get_recommendation(student_id):
         ]
 
     return jsonify({
-        "recommendations": recommendations
-    })
+    "recommendations": recommendations
+})
+
+@quiz.route("/performance-history/<int:student_id>", methods=["GET"])
+def performance_history(student_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT
+            id,
+            score,
+            total_questions
+        FROM quiz_results
+        WHERE student_id = %s
+        ORDER BY id DESC
+    """, (student_id,))
+
+    results = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    history = []
+
+    for item in results:
+        percentage = round(
+            (item["score"] / item["total_questions"]) * 100,
+            2
+        )
+
+        history.append({
+            "attempt": item["id"],
+            "score": item["score"],
+            "total_questions": item["total_questions"],
+            "percentage": percentage
+        })
+
+    return jsonify(history)

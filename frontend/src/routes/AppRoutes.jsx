@@ -9,7 +9,7 @@ import Recommendation from "../pages/Recommendation";
 import Quiz from "../pages/Quiz";
 import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
-
+import Performance from "../pages/Performance";
 
 function AppRoutes() {
   return (
@@ -24,6 +24,7 @@ function AppRoutes() {
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/performance" element={<Performance />} />
         
       </Routes>
     </BrowserRouter>

@@ -71,6 +71,13 @@ const fetchQuizResult = async () => {
     >
       Quiz
     </button>
+
+    <button
+  onClick={() => navigate("/performance")}
+  className="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-lg"
+>
+  Performance
+</button>
 </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
