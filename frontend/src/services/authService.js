@@ -27,3 +27,8 @@ export const getQuizzes = () => {
 export const submitQuiz = (data) => {
   return api.post("/submit-quiz", data);
 };
+
+export const getQuizResult = (studentId) => {
+  return api.get(`/quiz-result/${studentId}`);
+};
+

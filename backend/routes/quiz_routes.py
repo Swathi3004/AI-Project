@@ -73,3 +73,90 @@ def submit_quiz():
         "total_questions": total_questions,
         "percentage": round((score / total_questions) * 100, 2)
     })
+
+    # Get Latest Quiz Result
+@quiz.route("/quiz-result/<int:student_id>", methods=["GET"])
+def get_quiz_result(student_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT score, total_questions
+        FROM quiz_results
+        WHERE student_id = %s
+        ORDER BY id DESC
+        LIMIT 1
+    """, (student_id,))
+
+    result = cursor.fetchone()
+
+    cursor.close()
+    connection.close()
+
+    if not result:
+        return jsonify({
+            "message": "No quiz result found"
+        }), 404
+
+    percentage = round(
+        (result["score"] / result["total_questions"]) * 100,
+        2
+    )
+
+    return jsonify({
+        "score": result["score"],
+        "total_questions": result["total_questions"],
+        "percentage": percentage
+    })
+
+    # AI Recommendation API
+@quiz.route("/recommendation/<int:student_id>", methods=["GET"])
+def get_recommendation(student_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT score, total_questions
+        FROM quiz_results
+        WHERE student_id = %s
+        ORDER BY id DESC
+        LIMIT 1
+    """, (student_id,))
+
+    result = cursor.fetchone()
+
+    cursor.close()
+    connection.close()
+
+    if not result:
+        return jsonify({
+            "message": "No quiz result found"
+        }), 404
+
+    percentage = (result["score"] / result["total_questions"]) * 100
+
+    if percentage >= 90:
+        recommendations = [
+            "Learn Advanced React",
+            "Practice Node.js APIs",
+            "Explore Machine Learning Basics",
+            "Build Full Stack Projects"
+        ]
+    elif percentage >= 70:
+        recommendations = [
+            "Practice SQL Joins",
+            "Revise DBMS Concepts",
+            "Complete Java Programming Exercises",
+            "Take Another Quiz"
+        ]
+    else:
+        recommendations = [
+            "Revise Python Basics",
+            "Practice Loops and Functions",
+            "Learn Object-Oriented Programming",
+            "Retake the Quiz"
+        ]
+
+    return jsonify({
+        "recommendations": recommendations
+    })
