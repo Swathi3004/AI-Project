@@ -9,7 +9,7 @@ def get_dashboard(id):
     cursor = connection.cursor()
 
     cursor.execute(
-        "SELECT id, name, email, department, created_at FROM students WHERE id=%s",
+        "SELECT name FROM students WHERE id=%s",
         (id,)
     )
 
@@ -18,4 +18,8 @@ def get_dashboard(id):
     cursor.close()
     connection.close()
 
-    return jsonify(student)
+    return jsonify({
+        "student_name": student["name"],
+        "subjects": 6,
+        "ai_suggestions": 4
+    })
