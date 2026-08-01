@@ -4,6 +4,7 @@ import {
   FaRobot,
   FaClipboardCheck,
 } from "react-icons/fa";
+import { FaComments } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -137,6 +138,14 @@ function Dashboard() {
           <li>Watch Python Functions Tutorial</li>
         </ul>
       </div>
+
+      {/* Floating Chatbot Button */}
+<button
+  onClick={() => navigate("/chatbot")}
+  className="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110"
+>
+  <FaComments className="text-3xl" />
+</button>
     </div>
   );
 }
