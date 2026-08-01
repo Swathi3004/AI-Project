@@ -36,3 +36,6 @@ export const getPerformanceHistory = (studentId) => {
   return api.get(`/performance-history/${studentId}`);
 };
 
+
+
+
