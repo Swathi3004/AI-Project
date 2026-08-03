@@ -1,29 +1,29 @@
 from flask import Blueprint, request, jsonify
+from services.gemini_service import ask_ai
+import traceback
 
 chatbot = Blueprint("chatbot", __name__)
 
 @chatbot.route("/chat", methods=["POST"])
 def chat():
+    try:
+        data = request.get_json()
 
-    data = request.get_json()
+        message = data.get("message")
 
-    message = data["message"].lower()
+        if not message:
+            return jsonify({
+                "reply": "Please enter a message."
+            }), 400
 
-    if "python" in message:
-        reply = "Python is a powerful programming language used in AI, Web Development and Data Science."
+        reply = ask_ai(message)
 
-    elif "react" in message:
-        reply = "React is a JavaScript library used to build modern user interfaces."
+        return jsonify({
+            "reply": reply
+        })
 
-    elif "sql" in message:
-        reply = "SQL is used to store and retrieve data from databases."
-
-    elif "hello" in message:
-        reply = "Hello! How can I help you today?"
-
-    else:
-        reply = "Sorry, I don't know the answer yet."
-
-    return jsonify({
-        "reply": reply
-    })
+    except Exception:
+        traceback.print_exc()   # <-- This prints the full error in the terminal
+        return jsonify({
+            "reply": "Internal Server Error"
+        }), 500

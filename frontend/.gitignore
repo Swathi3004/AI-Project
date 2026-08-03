@@ -1,4 +1,6 @@
+# ===========================
 # Logs
+# ===========================
 logs
 *.log
 npm-debug.log*
@@ -7,18 +9,65 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# ===========================
+# Node Modules
+# ===========================
+node_modules/
+
+# ===========================
+# Build Files
+# ===========================
+dist/
+dist-ssr/
+
+# ===========================
+# Environment Files
+# ===========================
+.env
+backend/.env
 *.local
 
-# Editor directories and files
+# ===========================
+# Python
+# ===========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# ===========================
+# VS Code / IDE
+# ===========================
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
+
+# ===========================
+# Operating System Files
+# ===========================
 .DS_Store
+Thumbs.db
+
+# ===========================
+# Visual Studio
+# ===========================
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# ===========================
+# Python Test Files (Optional)
+# ===========================
+backend/test.py
+
+# ===========================
+# Cache
+# ===========================
+.cache/

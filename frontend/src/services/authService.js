@@ -1,5 +1,7 @@
 import api from "./api";
 
+const API = "http://127.0.0.1:5000/api";
+
 export const registerStudent = (data) => {
   return api.post("/register", data);
 };
@@ -34,6 +36,12 @@ export const getQuizResult = (studentId) => {
 
 export const getPerformanceHistory = (studentId) => {
   return api.get(`/performance-history/${studentId}`);
+};
+
+export const chatWithAI = (message) => {
+  return api.post("/chat", {
+    message,
+  });
 };
 
 
