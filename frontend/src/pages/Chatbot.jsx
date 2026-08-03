@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaRobot, FaUser, FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { chatWithAI } from "../services/authService";
 
 function Chatbot() {
   const navigate = useNavigate();
@@ -33,19 +34,38 @@ function Chatbot() {
     },
   ]);
 
-  const askQuestion = (question) => {
+  const askQuestion = async (question) => {
+  // Show user's question
+  setMessages((prev) => [
+    ...prev,
+    {
+      sender: "user",
+      text: question,
+    },
+  ]);
+
+  try {
+    const response = await chatWithAI(question);
+
     setMessages((prev) => [
       ...prev,
       {
-        sender: "user",
-        text: question,
-      },
-      {
         sender: "bot",
-        text: chatData[question],
+        text: response.data.reply,
       },
     ]);
-  };
+  } catch (error) {
+    console.log(error);
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        sender: "bot",
+        text: "Sorry! AI is not responding.",
+      },
+    ]);
+  }
+};
 
   const clearChat = () => {
     setMessages([
